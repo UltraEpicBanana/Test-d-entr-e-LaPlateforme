@@ -1,5 +1,4 @@
-# Test-d-entree-LaPlateforme
-# Projet Firewall Linux
+# Test-d-entree-LaPlateforme : Projet Firewall Linux
 
 Ce dépôt contient la documentation, les fichiers de configuration et scripts utilisés pour le projet firewall.
 
