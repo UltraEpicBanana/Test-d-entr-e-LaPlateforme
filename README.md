@@ -1,18 +1,22 @@
-# Test-d-entree-LaPlateforme : Projet Firewall Linux
+### Test d'entrée LaPlateforme : Projet Firewall Linux ###
 
-Ce dépôt contient la documentation, les fichiers de configuration et scripts utilisés pour le projet firewall.
 
-- `scripts/` : scripts bash pour iptables, logwatch et fail2ban.
 
-## Installation
+Ce repository correspond aux fichiers demandés dans le cadre du test de l'école LaPlateforme, dans le but de rentrer en deuxième année. 
+Celui-ci est composé d'une partie 'scripts' avec les fichiers de configuration des différentes étapes du projet, d'un pdf correspondant à mes démarches avec les réponses aux questions, et d'un pdf où sont détaillées mes motivations pour intégrer ce cursus.
 
-1. Exécuter les scripts dans l’ordre :
+
+Pour tester le travail, il faudra rendre les scripts executables puis les executer dans l’ordre.
+En vous remerciant pour l'attention portée à ma candidature et à mon projet.
+Cordialement Teva Clairefond.
 
 ```bash
-sudo bash chmod +x setup_iptables.sh
-sudo bash chmod +x setup_logwatch.sh
-sudo bash chmod +x setup_fail2ban.sh
+
+chmod +x setup_iptables.sh
+chmod +x setup_logwatch.sh
+chmod +x setup_fail2ban.sh
 
 sudo bash scripts/setup_iptables.sh
 sudo bash scripts/setup_logwatch.sh
 sudo bash scripts/setup_fail2ban.sh
+
