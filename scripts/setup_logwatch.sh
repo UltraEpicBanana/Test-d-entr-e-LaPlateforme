@@ -18,14 +18,11 @@ systemctl restart rsyslog
 
 # Ici le role de cron est de planifier les tâches de manière à enregistrer les activités de log dans un fichier.
 
-# J'ai d’abord définit une variable contenant le chemin du répertoire où les rapports seront sauvegardés
-
-
 
 cat <<'EOF' > /etc/cron.daily/00logwatch
 #!/bin/bash
 
-# Dossier de sortie
+# Dossier de sortie : variable contenant le chemin du répertoire où les rapports seront sauvegardés
 OUTPUT_DIR="/var/log/logwatch"
 mkdir -p "$OUTPUT_DIR"
 
