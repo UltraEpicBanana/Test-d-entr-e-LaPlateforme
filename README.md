@@ -2,13 +2,17 @@
 
 Ce dépôt contient la documentation, les fichiers de configuration et scripts utilisés pour le projet firewall.
 
-- `scripts/` : scripts bash pour initialiser iptables, logwatch et cron.
+- `scripts/` : scripts bash pour iptables, logwatch et fail2ban.
 
 ## Installation
 
 1. Exécuter les scripts dans l’ordre :
 
 ```bash
+sudo bash chmod +x setup_iptables.sh
+sudo bash chmod +x setup_logwatch.sh
+sudo bash chmod +x setup_fail2ban.sh
+
 sudo bash scripts/setup_iptables.sh
 sudo bash scripts/setup_logwatch.sh
 sudo bash scripts/setup_fail2ban.sh
