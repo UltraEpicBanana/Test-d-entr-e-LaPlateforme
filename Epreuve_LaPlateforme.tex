@@ -1,0 +1,399 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{array}
+\usepackage{booktabs}
+
+\titleformat{\section}{\normalfont\Large\bfseries}{Partie \thesection}{1em}{}
+\titleformat{\subsubsection}{\normalfont\large\bfseries}{\thesubsubsection}{1em}{}
+
+\definecolor{lightgray}{gray}{0.95}
+\lstset{
+  backgroundcolor=\color{lightgray},
+  basicstyle=\ttfamily\small,
+  frame=single,
+  breaklines=true,
+  postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space}
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Projet S\'ecurit\'e Serveur Linux}
+\lhead{S\'ecurit\'e et supervision}
+\cfoot{\thepage}
+
+\title{\textbf{Projet Firewall : Test d'entrée à LaPlateforme en deuxième année}}
+\author{Teva Clairefond}
+\date{Juillet 2025}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+
+
+
+
+
+\section{Questions}
+
+\subsection{Système}
+
+\subsubsection{Question 1 : Visualiser les processus SSH}
+
+Commande pour afficher les processus SSH actifs :
+\begin{lstlisting}
+ps -ef | grep ssh
+\end{lstlisting}
+
+Pour une vue interactive :
+\begin{lstlisting}
+sudo apt install htop
+htop
+\end{lstlisting}
+
+\subsubsection{Question 2 : Obtenir l'adresse IP de la machine}
+
+\begin{lstlisting}
+ip addr
+\end{lstlisting}
+
+\subsubsection{Question 3 : Hyperviseur de type 1 vs type 2}
+
+\begin{itemize}
+    \item \textbf{Type 1 (bare metal)} : Exécute directement sur le matériel. Utilisé en production pour virtualiser des serveurs dans les datacenters.
+    \item \textbf{Type 2 (hosted)} : Fonctionne au-dessus d’un OS. Utilisé pour le test et le développement (ex : VirtualBox, VMware Workstation).
+\end{itemize}
+
+\vspace{0.5cm}
+
+\subsection{Réseau}
+
+\subsubsection{Question 1 : Protocoles, classification OSI et sécurité}
+
+\subparagraph*{Classification des protocoles}
+
+\begin{tabular}{>{\bfseries}l l}
+\toprule
+Couche OSI & Protocoles \\
+\midrule
+Application (7) & HTTP, HTTPS, FTP, SFTP, DNS, SMTP, IMAP, POP3, SSH \\
+Transport (4) & TCP, UDP \\
+Réseau (3) & IP (IPv4, IPv6) \\
+Liaison de données (2) & Ethernet \\
+\bottomrule
+\end{tabular}
+
+\vspace{0.5cm}
+
+\subparagraph*{Protocoles sensibles au niveau sécurité}
+
+\begin{itemize}
+    \item \textbf{HTTPS / SSH} : Chiffrés, sécurisés.
+    \item \textbf{DNS} : Vulnérable au spoofing (empoisonnement).
+    \item \textbf{FTP} : Transfert non chiffré → écoute possible.
+    \item \textbf{TCP} : Vulnérable aux attaques SYN flood, spoofing.
+\end{itemize}
+
+\subsubsection{Question 2 : Couches OSI associées}
+
+\begin{tabular}{>{\bfseries}l l}
+\toprule
+Élément & Couche OSI \\
+\midrule
+Switch & Couche 2 – Liaison de données \\
+Routeur & Couche 3 – Réseau \\
+TCP & Couche 4 – Transport \\
+HTTP & Couche 7 – Application \\
+\bottomrule
+\end{tabular}
+
+\subsubsection{Question 3 : Enregistrements DNS}
+
+\begin{itemize}
+    \item \textbf{A record} : Lien nom de domaine $\rightarrow$ IPv4.
+    \item \textbf{AAAA record} : Lien nom de domaine $\rightarrow$ IPv6.
+\end{itemize}
+
+\subsubsection{Question 4 : SYN et ACK}
+
+\begin{itemize}
+    \item \textbf{SYN (Synchronize)} : Demande de connexion.
+    \item \textbf{ACK (Acknowledge)} : Accusé de réception.
+    \item \textbf{Handshake TCP} : SYN $\rightarrow$ SYN-ACK $\rightarrow$ ACK.
+\end{itemize}
+
+\vspace{0.5cm}
+
+\subsection{Sécurité}
+
+\subsubsection{Question 1 : ISO/IEC 27001}
+
+Norme internationale pour la mise en place d’un \textbf{système de management de la sécurité de l'information (SMSI)}. Elle définit les bonnes pratiques pour protéger la confidentialité, l’intégrité et la disponibilité des données.
+
+\subsubsection{Question 2 : Institutions de cybersécurité}
+
+\begin{itemize}
+    \item \textbf{France} :
+    \begin{itemize}
+        \item ANSSI : Agence nationale de la sécurité des systèmes d'information
+        \item CNIL : Autorité de protection des données personnelles
+    \end{itemize}
+    \item \textbf{International} :
+    \begin{itemize}
+        \item ENISA : Agence européenne pour la cybersécurité
+        \item NIST : National Institute of Standards and Technology (USA)
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{Question 3 : Moments de vulnérabilité et conséquences}
+
+\subparagraph*{Moments de vulnérabilité}
+
+\begin{itemize}
+    \item Connexion à un Wi-Fi public non sécurisé
+    \item Téléchargement d’applications non vérifiées
+    \item Navigation sur des sites non HTTPS
+    \item Utilisation de mots de passe faibles ou réutilisés
+    \item Absence de mises à jour des systèmes/appareils
+\end{itemize}
+
+\subparagraph*{Conséquences possibles}
+
+\begin{itemize}
+    \item Vol de données ou d’identifiants
+    \item Piratage de comptes personnels ou professionnels
+    \item Usurpation d’identité, chantage, rançongiciel
+\end{itemize}
+
+\subparagraph*{Personnes impactées}
+
+\begin{itemize}
+    \item \textbf{Famille} : Partage de réseau ou d’appareils
+    \item \textbf{Collègues / Clients} : Risques professionnels ou fuite de données
+    \item \textbf{Entreprise} : Perte d’image, d’argent ou interruption d’activité
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Projet Firewall}
+\subsection{Configuration du parefeu via iptables}
+
+\subsubsection{Mise en place du serveur web et SSH}
+
+Apr\`es ouverture du terminal, passage en mode super-utilisateur :
+
+\begin{lstlisting}[language=bash]
+sudo -s
+apt install apache2
+ip addr
+apt install openssh-server
+apt install iptables
+apt install tables  # erreur car paquet inexistant
+\end{lstlisting}
+
+\subsubsection{R\'einitialisation des r\`egles iptables}
+
+Suppression des r\`egles et cha\^ines pour les tables filter, nat, et mangle. R\'einitialisation des politiques \`a ACCEPT. Affichage des règles du parefeu pour vérifier la bonne application :
+
+\begin{lstlisting}[language=bash]
+iptables -nvL
+\end{lstlisting}
+
+\subsubsection{Configuration des r\`egles de s\'ecurit\'e}
+
+\`A partir d'une politique de blocage par d\'efaut, j'ai autoris\'e certains ports essentiels (SSH, HTTP, HTTPS) ainsi que le trafic \`a destination de localhost et les connexions \'etablies :
+
+\begin{lstlisting}[language=bash]
+iptables -P INPUT DROP
+iptables -P FORWARD DROP
+iptables -A INPUT -p tcp --dport 22 -m state --state NEW -j ACCEPT
+iptables -A INPUT -p tcp --dport 80 -m state --state NEW -j ACCEPT
+iptables -A INPUT -p tcp --dport 443 -m state --state NEW -j ACCEPT
+iptables -A INPUT -m state --state ESTABLISHED -j ACCEPT
+iptables -A INPUT -i lo -j ACCEPT
+iptables -A OUTPUT -o lo -j ACCEPT
+\end{lstlisting}
+
+\subsection{Supervision avec Logwatch et Rsyslog}
+
+\subsubsection{Installation et configuration}
+
+Installation de Logwatch et de Rsyslog pour assurer la lecture des journaux, Logwatch ne supportant pas directement journalctl :
+
+\begin{lstlisting}[language=bash]
+apt install logwatch -y
+apt install rsyslog -y
+\end{lstlisting}
+
+Ajout dans /etc/rsyslog.d/20-default.conf :
+
+\begin{lstlisting}
+auth,authpriv.* /var/log/auth.log
+\end{lstlisting}
+
+Cr\'eation du fichier sshd.conf pour Logwatch :
+
+\begin{lstlisting}
+nano /etc/logwatch/conf/logfiles/sshd.conf
+\end{lstlisting}
+
+Ajout dans /etc/logwatch/conf/logfiles/sshd.conf:
+
+\begin{lstlisting}
+LogFile = auth.log
+*RemoveHeaders
+\end{lstlisting}
+
+\subsubsection{Test}
+\begin{lstlisting}[language=bash]
+logwatch --range today --service sshd --service http --detail high --format text
+\end{lstlisting}
+Logwatch repère bien les connections ssh et http.
+
+
+\subsubsection{Automatisation de la génération de rapports}
+
+
+Configuration du système de planification de tâches (cron) de manière à enregistrer les activités dans un fichier. (/etc/cron.daily/00logwatch)
+Définition d'une variable contenant le chemin du répertoire où les rapports seront sauvegardés :
+
+\begin{lstlisting}[language=bash]
+OUTPUT_DIR="/var/log/logwatch"
+\end{lstlisting}
+
+Création du dossier s’il n’existait pas déjà, l’option \texttt{-p} évitant les erreurs en cas d’existence préalable :
+
+\begin{lstlisting}[language=bash]
+mkdir -p "$OUTPUT_DIR"
+\end{lstlisting}
+
+Définition d'une variable contenant le nom du fichier de sortie, comprenant la date du jour, et située dans le répertoire défini :
+
+\begin{lstlisting}[language=bash]
+OUTPUT_FILE="$OUTPUT_DIR/logwatch-$(date +%F).log"
+\end{lstlisting}
+
+Appel de \texttt{logwatch} avec une analyse de la journée précédente (\texttt{--range yesterday}) pour les services \texttt{sshd} et \texttt{http}, avec une sortie dans le fichier défini :
+
+\begin{lstlisting}[language=bash]
+/usr/sbin/logwatch --range yesterday --service sshd --service http --output file --format text --filename "$OUTPUT_FILE"
+\end{lstlisting}
+
+Transformation du fichier en fichier exécutable par \texttt{cron} grâce à la commande suivante, où \texttt{+x} donne les droits d’exécution :
+
+\begin{lstlisting}[language=bash]
+sudo chmod +x /etc/cron.daily/00logwatch
+\end{lstlisting}
+
+
+\subsection{Protection contre les attaques par force brute avec Fail2ban}
+
+\subsubsection{Installation de fail2ban et vsftpd}
+
+\begin{lstlisting}[language=bash]
+apt install fail2ban -y
+apt install vsftpd -y
+\end{lstlisting}
+
+\subsubsection{Fichier jail.local}
+
+Cr\'eation des jails pour SSH et FTP avec des seuils d'alerte et bannissement personnalis\'es :
+
+\begin{lstlisting}
+[sshd]
+enabled = true
+port = ssh
+filter = sshd
+logpath = journal
+maxretry = 5
+findtime = 300
+bantime = 3600
+backend = systemd
+
+[vsftpd-tbf-ip]
+enabled = true
+port = ftp
+filter = vsftpd
+logpath = journal
+maxretry = 10
+findtime = 300
+bantime = 3600
+backend = systemd
+
+[vsftpd-tbf-multiuser]
+enabled = true
+port = ftp
+filter = vsftpd-multiuser
+logpath = journal
+maxretry = 20
+findtime = 300
+bantime = 3600
+backend = systemd
+\end{lstlisting}
+
+\subsubsection{Filtres personnalis\'es}
+
+failregex analyse les logs dans journactl qui correspondent à la syntaxe indiquée. Cela permet de définir un filtre qui va trier les adresses IP qui vont être placées dans la jail vsftpd-tbf-ip : 
+
+
+\textbf{Fichier vsftpd.conf} (/etc/fail2ban/filter.d/vsftpd.conf) :
+
+\begin{lstlisting}
+[Definition]
+failregex = ^.*pam_unix\(vsftpd:auth\): authentication failure;.*rhost=(::ffff:)?<HOST>
+ignoreregex =
+\end{lstlisting}
+
+\textbf{Fichier vsftpd-multiuser.conf} :
+
+\begin{lstlisting}
+[Definition]
+failregex = ^.*pam_unix\(vsftpd:auth\): authentication failure;.*rhost=(::ffff:)?<HOST>
+ignoreregex =
+\end{lstlisting}
+
+\subsubsection{Red\'emarrage et v\'erifications}
+
+\begin{lstlisting}[language=bash]
+sudo systemctl restart fail2ban
+sudo systemctl enable fail2ban
+\end{lstlisting}
+
+Ajout de la r\`egle pour autoriser le port FTP :
+
+\begin{lstlisting}[language=bash]
+iptables -A INPUT -p tcp --dport 21 -m state --state NEW -j ACCEPT
+\end{lstlisting}
+
+\textbf{V\'erifications avec Putty (SSH) et FTP depuis Powershell} :
+
+\begin{lstlisting}[language=bash]
+fail2ban-client status sshd
+fail2ban-client status vsftpd-tbf-ip
+\end{lstlisting}
+
+
+\end{document}
