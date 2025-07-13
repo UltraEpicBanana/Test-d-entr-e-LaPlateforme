@@ -3,7 +3,7 @@
 
 
 Ce repository correspond aux fichiers demandés dans le cadre du test de l'école LaPlateforme, dans le but de rentrer en deuxième année. 
-Celui-ci est composé d'une partie 'scripts' avec les fichiers de configuration des différentes étapes du projet, d'un pdf correspondant à mes démarches avec les réponses aux questions, et d'un pdf où sont détaillées mes motivations pour intégrer ce cursus.
+Celui-ci est composé d'une partie 'scripts' avec les fichiers de configuration des différentes étapes du projet, d'un pdf et d'un fichier .tex correspondants à mes démarches avec les réponses aux questions, et d'un pdf où sont détaillées mes motivations pour intégrer ce cursus.
 
 
 Pour tester le travail, il faudra rendre les scripts executables puis les executer dans l’ordre.
