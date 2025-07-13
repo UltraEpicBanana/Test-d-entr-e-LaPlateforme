@@ -14,3 +14,33 @@ EOF
 
 # Restart de rsyslog pour appliquer les changements 
 systemctl restart rsyslog
+
+
+# Ici le role de cron est de planifier les tâches de manière à enregistrer les activités de log dans un fichier.
+
+# J'ai d’abord définit une variable contenant le chemin du répertoire où les rapports seront sauvegardés
+
+
+
+cat <<'EOF' > /etc/cron.daily/00logwatch
+#!/bin/bash
+
+# Dossier de sortie
+OUTPUT_DIR="/var/log/logwatch"
+mkdir -p "$OUTPUT_DIR"
+
+# Nom de fichier avec date
+OUTPUT_FILE="$OUTPUT_DIR/logwatch-$(date +%F).log"
+
+# Exécution de logwatch pour 1 jour, service SSH, sortie fichier
+/usr/sbin/logwatch --range yesterday \
+                   --service sshd \
+                   --output file \
+                   --format text \
+                   --filename "$OUTPUT_FILE"
+EOF
+
+# Rendre le script exécutable
+sudo chmod +x /etc/cron.daily/00logwatch
+
+
