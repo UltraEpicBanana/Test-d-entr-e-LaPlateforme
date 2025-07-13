@@ -15,6 +15,7 @@ logpath = /var/log/auth.log
 maxretry = 5
 findtime = 300
 bantime = 3600
+backend = systemd
 
 [vsftpd-tbf-ip]
 enabled = true
@@ -24,6 +25,7 @@ logpath = journal
 maxretry = 10
 findtime = 300
 bantime = 3600
+backend = systemd
 
 [vsftpd-tbf-multiuser]
 enabled = true
@@ -33,6 +35,7 @@ logpath = journal
 maxretry = 20
 findtime = 300
 bantime = 3600
+backend = systemd
 
 EOF
 
