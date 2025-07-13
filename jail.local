@@ -1,0 +1,26 @@
+[sshd]
+enabled = true
+port = ssh
+filter = sshd
+logpath = journal
+maxretry = 5
+findtime = 300
+bantime = 3600
+
+[vsftpd-tbf-ip]
+enabled = true
+port = ftp
+filter = vsftpd
+logpath = journal
+maxretry = 10
+findtime = 300
+bantime = 3600
+
+[vsftpd-tbf-multiuser]
+enabled = true
+port = ftp
+filter = vsftpd-multiuser
+logpath = journal
+maxretry = 20
+findtime = 300
+bantime = 3600
