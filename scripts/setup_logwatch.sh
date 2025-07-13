@@ -1,4 +1,6 @@
 #!/bin/bash
+
+#######################      LOGWATCH ET RSYSLOG
 # logwatch ne peut pas acceder à systemctl, c'est pourquoi nous avons besoin de rsyslog
 apt install -y logwatch rsyslog
 
@@ -16,6 +18,7 @@ EOF
 systemctl restart rsyslog
 
 
+########################      CRON
 # Ici le role de cron est de planifier les tâches de manière à enregistrer les activités de log dans un fichier.
 
 
