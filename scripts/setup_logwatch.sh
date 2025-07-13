@@ -1,7 +1,7 @@
 #!/bin/bash
 apt install -y logwatch rsyslog
 
-# Add auth logs for rsyslog
+# Ajout des autoriasations des logs pour rsyslog
 echo "auth,authpriv.* /var/log/auth.log" > /etc/rsyslog.d/20-default.conf
 
 # Create Logwatch config for sshd
